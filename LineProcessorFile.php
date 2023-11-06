@@ -1,10 +1,14 @@
 <?php 
 
-class LineReaderFile{
+include "LineProcessor.php";
+
+class LineProcessorFile implements LineProcessor {
     
     private string $fileName;
-    
 
+    /**
+     * @return array of results - average waiting times of the queries, or "-"
+     */
     public function process() {
 
         $arrResult = [];
@@ -17,7 +21,7 @@ class LineReaderFile{
 
         foreach($lines as $line) {
 
-            //if it would be a big file, would need to change this to read by parts because of memory
+            //if it would be a big file, would need to change this to read by parts 
             if($firstLine){
                 $firstLine = false;
                 continue;

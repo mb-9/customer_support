@@ -2,11 +2,11 @@
 
 class Line {
 
-    protected int $serviceId;
-    protected ?int $serviceVariationId  = NULL;
-    protected int $questionType;
-    protected ?int $questionCategory    = NULL;
-    protected ?int $questonSubcategory  = NULL;
+    protected int    $serviceId;
+    protected ?int   $serviceVariationId  = NULL;
+    protected int    $questionType;
+    protected ?int   $questionCategory    = NULL;
+    protected ?int   $questionSubcategory  = NULL;
     protected string $responseType;
 
     public static $responseTypeFirstAnswer  = "P";
@@ -26,8 +26,8 @@ class Line {
      * Set the value of serviceId
      *
      * @param int $serviceId
-     *
      * @return self
+     * @throws Exception
      */
     public function setServiceId(int $serviceId): self {
        
@@ -54,7 +54,7 @@ class Line {
      * Set the value of serviceVariationId
      *
      * @param int $serviceVariationId
-     *
+     * @throws \Exception 
      * @return self
      */
     public function setServiceVariationId(int $serviceVariationId): self {
@@ -81,7 +81,7 @@ class Line {
      * Set the value of questionType
      *
      * @param int $questionType
-     *
+     * @throws \Exception 
      * @return self
      */
     public function setQuestionType(int $questionType): self {
@@ -108,7 +108,7 @@ class Line {
      * Set the value of questionCategory
      *
      * @param ?int $questionCategory
-     *
+     * @throws \Exception 
      * @return self
      */
     public function setQuestionCategory(?int $questionCategory): self {
@@ -124,28 +124,28 @@ class Line {
     
 
     /**
-     * Get the value of questonSubcategory
+     * Get the value of questionSubcategory
      *
      * @return ?int
      */
     public function getQuestionSubcategory(): ?int {
-        return $this->questonSubcategory;
+        return $this->questionSubcategory;
     }
 
     /**
-     * Set the value of questonSubcategory
+     * Set the value of questionSubcategory
      *
-     * @param ?int $questonSubcategory
-     *
+     * @param ?int $questionSubcategory
+     * @throws \Exception 
      * @return self
      */
-    public function setQuestionSubcategory(?int $questonSubcategory): self {
+    public function setQuestionSubcategory(?int $questionSubcategory): self {
 
-        if($questonSubcategory < LineSettings::$questionSubcategoryMin || $questonSubcategory > LineSettings::$questionSubcategoryMax){
-            throw new \Exception("Invalid value of variable questonSubcategory");
+        if($questionSubcategory < LineSettings::$questionSubcategoryMin || $questionSubcategory > LineSettings::$questionSubcategoryMax){
+            throw new \Exception("Invalid value of variable questionSubcategory");
         }
         
-        $this->questonSubcategory = $questonSubcategory;
+        $this->questionSubcategory = $questionSubcategory;
         return $this;
     }
 
@@ -162,7 +162,7 @@ class Line {
      * Set the value of responseType
      *
      * @param string $responseType
-     *
+     * @throws \Exception 
      * @return self
      */
     public function setResponseType(string $responseType): self {

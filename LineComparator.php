@@ -3,7 +3,13 @@
 
 class LineComparator{
 
-    
+    /**
+     * Need to get all timelines that are matching the queryline
+     * 
+     * @param Queryline $queryline
+     * @param $arrTimeline
+     * @return string
+     */
     public static function matchAllAndGetWaitingTime(Queryline $queryline, $arrTimeline) : string{
 
         $waitingTime                = 0;
@@ -25,7 +31,11 @@ class LineComparator{
         return $waitingTime/$countOfMatchingTimelines;
     }
 
-
+    /**
+     * @param Queryline $queryline
+     * @param Timeline $timeline
+     * @return int
+     */
     public static function matchAndGetWaitingTime(Queryline $queryline, Timeline $timeline) : int{
 
 

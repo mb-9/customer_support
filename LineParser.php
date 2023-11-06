@@ -5,9 +5,13 @@ include 'Timeline.php';
 include 'Queryline.php';
 
 
-
 class LineParser {
 
+    /**
+     * @param String $strLine
+     * @return Line
+     * @throws Exception
+     */
     public static function createLineObject(String $strLine) : Line {
      
         $countSpaces = substr_count($strLine, " ");
@@ -25,7 +29,7 @@ class LineParser {
         }elseif($arrValues[0] == "D" && $countSpaces == 4){
             $line = new Queryline();
             $strDate = $arrValues[4];
-            LineParser::parseDate($strDate, $line);
+            LineParser::parseAndSetDate($strDate, $line);
 
         }else{
             throw new \Exception("Unknown type of line");
@@ -34,16 +38,23 @@ class LineParser {
         $line->setResponseType($arrValues[3]);
 
         $service    = $arrValues[1]; 
-        LineParser::parseService($service, $line);
+        LineParser::parseAndSetService($service, $line);
 
         $question   = $arrValues[2];
-        LineParser::parseQuestion($question, $line);
+        LineParser::parseAndSetQuestion($question, $line);
       
         return $line;
              
     }
 
-    private static function parseDate($strDate, $line){
+    /**
+     * Format of the date can be one date 01.01.2012 or range of dates 01.01.2012-01.12.2012, parsing both
+     * @param $strDate
+     * @param $line
+     * @throws \Exception 
+     * 
+     */
+    private static function parseAndSetDate($strDate, $line){
 
         $countDash = substr_count($strDate, "-");
         if($countDash == 1){
@@ -57,7 +68,14 @@ class LineParser {
 
     }
 
-    private static function parseService($strService, $line){
+    /**
+     * 
+     * Format of the service can be "1" or "1.2", parsing all options
+     * @param $strService
+     * @param $line
+     * @throws Exception
+     */
+    private static function parseAndSetService($strService, $line){
         $countDot   = substr_count($strService, ".");
 
         if($countDot == 0){
@@ -71,21 +89,32 @@ class LineParser {
         }
     }
 
-
-    private static function parseQuestion($strQuestion, $line){
+    /**
+     * Format of the question can be "1" or "1.2" or "1.2.3", parsing all options
+     * @param $strQuestion
+     * @param $line
+     * @throws Exception
+     */
+    private static function parseAndSetQuestion($strQuestion, $line){
         $countDot   = substr_count($strQuestion, ".");
 
         if($countDot == 0){
+
             $line->setQuestionType(str_replace("*", "0", $strQuestion));
+
         }else if($countDot == 1){
+
             $arrQuestion = explode(".", $strQuestion);
             $line->setQuestionType($arrQuestion[0]);
             $line->setQuestionCategory($arrQuestion[1]);
+
         }else if($countDot == 2){
+
             $arrQuestion = explode(".", $strQuestion);
             $line->setQuestionType($arrQuestion[0]);
             $line->setQuestionCategory($arrQuestion[1]);
             $line->setQuestionSubcategory($arrQuestion[2]);
+
         }else {
             throw new \Exception("Invalid question");
         }

@@ -48,10 +48,11 @@ class Queryline extends Line {
     }
 
     /**
-     * Set the value of serviceId
+     * Set the value of serviceId 
+     * Overriding setServiceId() - Queryline can have * as serviceId, asterisk replaced by 0
      *
      * @param int $serviceId
-     *
+     * @throws Exception
      * @return self
      */
     public function setServiceId(int $serviceId): self {
@@ -69,9 +70,10 @@ class Queryline extends Line {
     
     /**
      * Set the value of questionType
+     * Overriding setQuestionType() - Queryline can have * as questionType, asterisk replaced by 0
      *
      * @param int $questionType
-     *
+     * @throws Exception
      * @return self
      */
     public function setQuestionType(int $questionType): self {

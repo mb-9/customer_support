@@ -3,13 +3,13 @@
 include 'LineParser.php';
 include 'LineSettings.php';
 include 'LineComparator.php';
-include 'LineReaderFile.php';
+include 'LineProcessorFile.php';
 
 $fileName       = "input.txt";
 
-$lineReaderFile = new LineReaderFile();
-$lineReaderFile->setFileName($fileName);
-$arrOutput = $lineReaderFile->process();
+$lineProcessorFile = new LineProcessorFile();
+$lineProcessorFile->setFileName($fileName);
+$arrOutput = $lineProcessorFile->process();
 
 foreach($arrOutput as $output){
     echo $output."<br/>";
