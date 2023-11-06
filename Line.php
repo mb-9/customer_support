@@ -3,10 +3,10 @@
 class Line {
 
     protected int $serviceId;
-    protected ?int $serviceVariationId;
+    protected ?int $serviceVariationId  = NULL;
     protected int $questionType;
-    protected ?int $questionCategory;
-    protected ?int $questonSubcategory;
+    protected ?int $questionCategory    = NULL;
+    protected ?int $questonSubcategory  = NULL;
     protected string $responseType;
 
     public static $responseTypeFirstAnswer  = "P";
@@ -46,7 +46,7 @@ class Line {
      *
      * @return int
      */
-    public function getServiceVariationId(): int {
+    public function getServiceVariationId(): ?int {
         return $this->serviceVariationId;
     }
 
