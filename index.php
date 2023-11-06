@@ -3,48 +3,15 @@
 include 'LineParser.php';
 include 'LineSettings.php';
 include 'LineComparator.php';
+include 'LineReaderFile.php';
 
-$lines      = file('input.txt');
-$firstLine  = true;
+$fileName       = "input.txt";
 
-$arrLineObjects = [];
-$lineCount      = 0;
+$lineReaderFile = new LineReaderFile();
+$lineReaderFile->setFileName($fileName);
+$arrOutput = $lineReaderFile->process();
 
-foreach($lines as $line) {
-
-    //if it would be a big file, would need to change this to read by parts because of memory
-    if($firstLine){
-        $firstLine = false;
-        continue;
-    } 
-
-    try{
-
-        $lineObj  = LineParser::createLineObject($line);
-        
-        if($lineObj instanceof Timeline){
-            $arrLineObjects[] = $lineObj;
-        }else{
-            echo LineComparator::matchAllAndGetWaitingTime($lineObj, $arrLineObjects );
-        }
-
-    }catch(\Exception $ex) {
-        echo "Invalid line number ". $lineCount;
-    }
-
-    $lineCount++;
-    
-    //var_dump($lineObj);
-
+foreach($arrOutput as $output){
+    echo $output."<br/>";
 }
-
-
-
-
-
-
-
-
-
-
 
