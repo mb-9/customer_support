@@ -9,8 +9,8 @@ class Line {
     protected ?int   $questionSubcategory  = NULL;
     protected string $responseType;
 
-    public static $responseTypeFirstAnswer  = "P";
-    public static $responseTypeNextAnswer   = "N";
+    public static string $responseTypeFirstAnswer  = "P";
+    public static string $responseTypeNextAnswer   = "N";
 
 
     /**

@@ -2,14 +2,16 @@
 
 include "LineProcessor.php";
 
-class LineProcessorFile implements LineProcessor {
+class LineProcessorFile extends LineProcessor
+{
     
     private string $fileName;
 
     /**
      * @return array of results - average waiting times of the queries, or "-"
      */
-    public function process() {
+    public function process(): array
+    {
 
         $arrResult = [];
        
